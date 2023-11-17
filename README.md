@@ -8,11 +8,22 @@ A simple and lightweight npm package for converting Word documents (docx) to PDF
 - Easy-to-use API: Convert docx files to PDF with just a few lines of code.
 - Batch conversion: Convert entire directories of docx files to PDF.
 
-<!-- ## Installation
+## Installation
 
 Install the package via npm:
 
 ```bash
-npm install docx-to-pdf-converter -->
+npm install docx-to-pdf-converter
+```
+
+## Usage
+
+```javascript
+const topdf = require('docx2pdf-converter')
+
+const inputPath = './report.docx';
+
+topdf.convert(inputPath,'output.pdf')
+```
 
 

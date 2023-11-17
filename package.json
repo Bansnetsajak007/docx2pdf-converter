@@ -1,0 +1,22 @@
+{
+  "name": "docx2pdf-converter",
+  "version": "1.0.0",
+  "description": "convert docx file to pdf file",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bansnetsajak007/docx2pdf-converter.git"
+  },
+  "keywords": [
+    "docx2pdf"
+  ],
+  "author": "Sajak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bansnetsajak007/docx2pdf-converter/issues"
+  },
+  "homepage": "https://github.com/Bansnetsajak007/docx2pdf-converter#readme"
+}

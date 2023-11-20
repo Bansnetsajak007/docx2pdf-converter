@@ -13,7 +13,7 @@ A simple and lightweight npm package for converting Word documents (docx) to PDF
 Install the package via npm:
 
 ```bash
-npm install docx-to-pdf-converter
+npm i docx2pdf-converter
 ```
 
 ## Usage

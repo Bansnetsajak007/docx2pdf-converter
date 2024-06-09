@@ -22,6 +22,22 @@ function windows(inputPath, outputPath, keepActive) {
   
     execSync(command);
   }
+
+  // New PDF to DOCX conversion functions for Windows and macOS hell yeahhh
+function windowsPdfToDocx(inputPath, outputPath, keepActive = false) {
+  if (!inputPath) {
+      console.error('Input path is not provided.');
+      return;
+  }
+
+  const scriptPath = path.resolve(__dirname, 'convertTodocx.ps1');
+  const inputFilePath = path.resolve(inputPath);
+  const outputFilePath = path.resolve(outputPath);
+
+  const command = `powershell -File "${scriptPath}" "${inputFilePath}" "${outputFilePath}" ${keepActive ? 'true' : 'false'}`;
+
+  execSync(command);
+}
   
 
 /**
@@ -111,6 +127,7 @@ module.exports = {
     convert,
     resolvePaths,
     windows,
+    windowsPdfToDocx,
     macos,
     packageVersion,
   };

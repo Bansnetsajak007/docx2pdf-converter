@@ -23,7 +23,7 @@ function windows(inputPath, outputPath, keepActive) {
     execSync(command);
   }
 
-  // New PDF to DOCX conversion functions for Windows and macOS hell yeahhh
+  // New PDF to DOCX conversion functions for Windows hell yeahhh
 function windowsPdfToDocx(inputPath, outputPath, keepActive = false) {
   if (!inputPath) {
       console.error('Input path is not provided.');
@@ -39,6 +39,23 @@ function windowsPdfToDocx(inputPath, outputPath, keepActive = false) {
   execSync(command);
 }
   
+
+/*
+  Linux specific function
+ */
+
+function linux(inputPath, outputPath, keepActive) {
+  if (!inputPath) {
+    console.error('Input path is not provided.');
+    return;
+  }
+
+  const inputFilePath = path.resolve(inputPath);
+  const outputFilePath = outputPath ? path.resolve(outputPath) : `${inputFilePath}.pdf`;
+  const command = `libreoffice --headless --convert-to pdf "${inputFilePath}" --outdir "${path.dirname(outputFilePath)}"`;
+  execSync(command);
+
+}
 
 /**
  * Resolve input and output paths
@@ -117,9 +134,13 @@ function macos(inputPath, outputPath, keepActive) {
  */
 function convert(inputPath, outputPath, keepActive = false) {
   if (process.platform === 'darwin') {
-    macos(inputPath, outputPath, keepActive);
+      macos(inputPath, outputPath, keepActive);
+  } else if (process.platform === 'win32') {
+      windows(inputPath, outputPath, keepActive);
+  } else if (process.platform === 'linux') {
+      linux(inputPath, outputPath, keepActive);
   } else {
-    windows(inputPath, outputPath, keepActive);
+      console.error('Unsupported platform:', process.platform);
   }
 }
 
@@ -129,6 +150,7 @@ module.exports = {
     windows,
     windowsPdfToDocx,
     macos,
+    linux,
     packageVersion,
   };
 

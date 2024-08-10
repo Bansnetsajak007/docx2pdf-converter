@@ -52,7 +52,7 @@ function linux(inputPath, outputPath, keepActive) {
 
   const inputFilePath = path.resolve(inputPath);
   const outputFilePath = outputPath ? path.resolve(outputPath) : `${inputFilePath}.pdf`;
-  const command = `libreoffice --headless --convert-to pdf "${inputFilePath}" --outdir "${path.dirname(outputFilePath)}"`;
+  const command = `unoconv -f pdf -o "${outputPath}" "${inputPath}"`;;
   execSync(command);
 
 }

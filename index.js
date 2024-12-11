@@ -1,9 +1,51 @@
 const fs = require('fs');
 const path = require('path');
+const AdmZip = require('adm-zip'); 
 const { execSync } = require('child_process');
 const assert = require('assert');
 
 const packageVersion = require('./package.json').version;
+
+/**
+ * Extract images from a DOCX file
+ * @param {string} inputPath - Path to the DOCX file
+ * @param {string} outputDir - Directory where images will be saved
+ */
+function extractImages(inputPath, outputDir) {
+  if (!inputPath) {
+    console.error('Input path is not provided.');
+    return;
+  }
+
+  if (!fs.existsSync(inputPath)) {
+    console.error('Input file does not exist:', inputPath);
+    return;
+  }
+
+  // Ensure the output directory exists
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
+
+  const zip = new AdmZip(inputPath);
+  const zipEntries = zip.getEntries(); // List all entries in the ZIP
+
+  // Iterate over entries to find images in the "word/media" folder
+  zipEntries.forEach(entry => {
+    if (entry.entryName.startsWith('word/media/')) {
+      const imageName = entry.entryName.split('/').pop();
+      const imagePath = path.join(outputDir, imageName);
+
+      // Extract the image to the output directory
+      fs.writeFileSync(imagePath, entry.getData());
+      console.log('Extracted image:', imageName);
+    }
+  });
+
+  console.log('Image extraction completed.');
+}
+
+
 
 /**
  * Convert Word document to PDF on Windows using PowerShell
@@ -151,6 +193,7 @@ module.exports = {
     windowsPdfToDocx,
     macos,
     linux,
+    extractImages,
     packageVersion,
   };
 

@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Bansnetsajak007/docx2pdf-converter/issues"
   },
-  "homepage": "https://github.com/Bansnetsajak007/docx2pdf-converter#readme"
+  "homepage": "https://github.com/Bansnetsajak007/docx2pdf-converter#readme",
+  "dependencies": {
+    "adm-zip": "^0.5.16"
+  }
 }

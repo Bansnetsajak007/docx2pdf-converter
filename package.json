@@ -1,10 +1,13 @@
 {
-  "name": "docx2pdf-converter",
-  "version": "2.1.0",
-  "description": "convert docx file to pdf file",
-  "main": "index.js",
+  "name": "docx2pdf-cli",
+  "version": "1.0.0",
+  "description": "CLI for docx2pdf converter",
+  "main": "cli.js",
+  "bin": "cli.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "build:exe": "pkg . --targets node18-win-x64 --output dist/docx2pdf.exe",
+    "build:sh": "pkg . --targets node18-linux-x64 --output dist/docx2pdf"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,10 @@
   },
   "homepage": "https://github.com/Bansnetsajak007/docx2pdf-converter#readme",
   "dependencies": {
-    "adm-zip": "^0.5.16"
+    "adm-zip": "^0.6.1"
+  },
+  "pkg": {
+    "assets": ["index.js", "node_modules/adm-zip/**/*"]
   }
 }
+

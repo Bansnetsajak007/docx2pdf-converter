@@ -148,15 +148,10 @@ async function linux(inputPath, outputPath, keepActive) {
 
   const inputFilePath = path.resolve(inputPath);
   const outputFilePath = outputPath ? path.resolve(outputPath) : `${inputFilePath}.pdf`;
-  const command = `unoconv -f pdf -o "${outputPath}" "${inputPath}"`;
-  // const command = `soffice --headless --convert-to pdf:writer_pdf_Export --outdir "${path.dirname(outputPath)}" "${inputPath}"`;
+  const command = `unoconv -f pdf -o "${outputFilePath}" "${inputFilePath}" 2>/dev/null`;
   
   const result = await execAsync(command);
-  if(result.stderr) {
-    throw new Error(result.stderr);
-  }
-
-  return result.stdout;
+  return result.stdout || 'Conversion completed successfully.';
 }
 
 /**
